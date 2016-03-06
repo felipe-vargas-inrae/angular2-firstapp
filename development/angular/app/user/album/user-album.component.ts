@@ -25,7 +25,7 @@ import {UserService} from '../user.service';
 					<span class="label label-danger" (click)="onSelectAlbum(post)">Close</span>
 					<h4>Pictures</h4>
 					<ul class="list-inline">
-						<li *ngFor="#picture of selectedPictures" class="  " >
+						<li *ngFor="#picture of selectedPictures" >
 						 
 						 	<img class="animated infinite " [ngClass]="{rotateIn: animateIt }"  src="{{picture.thumbnailUrl}}">
 
@@ -67,17 +67,18 @@ export class UserAlbumComponent implements OnInit {
 			this.selectedAlbum = null;
 			return; 
 		}
-		this.selectedAlbum = album;
-		this._userService.getPicturesByAlbumId(this.selectedAlbum.id).subscribe(pictures => this.loadPictures(pictures));
-
+		
+		this._userService.getPicturesByAlbumId(album.id).subscribe(pictures => this.loadPictures(pictures,album));
 	}
 	
-	loadPictures(pictures:Array<Picture>){
+	loadPictures(pictures:Array<Picture>, album:Album ){
 		this.selectedPictures = pictures;
-		this.animateIt = true;
+		this.selectedAlbum = album;
 
+		this.animateIt = false;
 		var scope = this;
 
+		
 		var interval=setTimeout(function(){
 			
 			scope.animateIt = false;

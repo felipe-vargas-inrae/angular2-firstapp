@@ -13,7 +13,7 @@ import {Router} from 'angular2/router';
 	<div *ngIf="user" class="">
 		<h2>{{user.name}}'s Posts:</h2>
 		<ul *ngIf="posts" class="posts">
-			<li *ngFor="#post of posts"   class="col-xs-12 col-md-4 "
+			<li *ngFor="#post of posts"   class="col-xs-12  "
 				[ngClass]="{active: post===selectedPost }"
 			>
 				<h4 class="bg-primary" (click)="onSelectPost(post)"> {{post.title}}</h4>
@@ -22,7 +22,7 @@ import {Router} from 'angular2/router';
 					{{post.body}}</p>
 				</div>
 				<span class="label label-default" (click)="onSelectPost(post)">Comments</span>
-				<div class="comments" *ngIf="post===selectedPost">
+				<div class="comments animated" *ngIf="post===selectedPost">
 					<h4>Comments</h4>
 					<ul>
 						<li *ngFor="#comment of selectedComments"  class="col-xs-11 ">
@@ -37,6 +37,7 @@ import {Router} from 'angular2/router';
 				</div>
 			</li>
 		</ul>
+		<div *ngIf="!posts" >Cargando</div>
 	</div>`
 })
 

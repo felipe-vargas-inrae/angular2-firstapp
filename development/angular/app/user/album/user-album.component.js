@@ -49,12 +49,12 @@ System.register(['angular2/core', "../../session", '../user.service'], function(
                         this.selectedAlbum = null;
                         return;
                     }
-                    this.selectedAlbum = album;
-                    this._userService.getPicturesByAlbumId(this.selectedAlbum.id).subscribe(function (pictures) { return _this.loadPictures(pictures); });
+                    this._userService.getPicturesByAlbumId(album.id).subscribe(function (pictures) { return _this.loadPictures(pictures, album); });
                 };
-                UserAlbumComponent.prototype.loadPictures = function (pictures) {
+                UserAlbumComponent.prototype.loadPictures = function (pictures, album) {
                     this.selectedPictures = pictures;
-                    this.animateIt = true;
+                    this.selectedAlbum = album;
+                    this.animateIt = false;
                     var scope = this;
                     var interval = setTimeout(function () {
                         scope.animateIt = false;
@@ -64,7 +64,7 @@ System.register(['angular2/core', "../../session", '../user.service'], function(
                 UserAlbumComponent = __decorate([
                     core_1.Component({
                         selector: "user-album",
-                        template: "\n\t<div *ngIf=\"user\"  >\n\t\t<h2>{{user.name}}'s Albums</h2>\n\t\t<ul *ngIf=\"albums\" class=\"albums list-group\">\n\t\t\t<li *ngFor=\"#album of albums\"  class=\"list-group-item\"\n\t\t\t\t\n\t\t\t >\n\n\t\t\t\t<h3  [ngClass]=\"{'bg-primary': album===selectedAlbum }\" (click)=\"onSelectAlbum(album)\">\n\t\t\t\t\t{{album.title}}\n\t\t\t\t</h3>\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"pictures\" *ngIf=\"album===selectedAlbum\">\n\t\t\t\t\t<span class=\"label label-danger\" (click)=\"onSelectAlbum(post)\">Close</span>\n\t\t\t\t\t<h4>Pictures</h4>\n\t\t\t\t\t<ul class=\"list-inline\">\n\t\t\t\t\t\t<li *ngFor=\"#picture of selectedPictures\" class=\"  \" >\n\t\t\t\t\t\t \n\t\t\t\t\t\t \t<img class=\"animated infinite \" [ngClass]=\"{rotateIn: animateIt }\"  src=\"{{picture.thumbnailUrl}}\">\n\n\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t</ul>\n\t</div>"
+                        template: "\n\t<div *ngIf=\"user\"  >\n\t\t<h2>{{user.name}}'s Albums</h2>\n\t\t<ul *ngIf=\"albums\" class=\"albums list-group\">\n\t\t\t<li *ngFor=\"#album of albums\"  class=\"list-group-item\"\n\t\t\t\t\n\t\t\t >\n\n\t\t\t\t<h3  [ngClass]=\"{'bg-primary': album===selectedAlbum }\" (click)=\"onSelectAlbum(album)\">\n\t\t\t\t\t{{album.title}}\n\t\t\t\t</h3>\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"pictures\" *ngIf=\"album===selectedAlbum\">\n\t\t\t\t\t<span class=\"label label-danger\" (click)=\"onSelectAlbum(post)\">Close</span>\n\t\t\t\t\t<h4>Pictures</h4>\n\t\t\t\t\t<ul class=\"list-inline\">\n\t\t\t\t\t\t<li *ngFor=\"#picture of selectedPictures\" >\n\t\t\t\t\t\t \n\t\t\t\t\t\t \t<img class=\"animated infinite \" [ngClass]=\"{rotateIn: animateIt }\"  src=\"{{picture.thumbnailUrl}}\">\n\n\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t</ul>\n\t</div>"
                     }), 
                     __metadata('design:paramtypes', [session_1.Session, user_service_1.UserService])
                 ], UserAlbumComponent);
