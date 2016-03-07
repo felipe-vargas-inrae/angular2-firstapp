@@ -55,7 +55,7 @@ export class UserAlbumComponent implements OnInit {
 	}
 
 	getAlbumsUser() {
-
+		console.log('no funciona');
 		if (this.user) {
 			this._userService.getAlbumsByUserId(this.user.id).subscribe(albums=> this.albums = albums);
 		}
